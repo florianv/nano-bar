@@ -1,0 +1,114 @@
+<!--
+This file is part of nano-bar.
+
+(c) Florian Voutzinos <florian@voutzinos.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="nanobar-import.html">
+
+<!--
+This element is a loading bar using the nanobar library.
+
+Example:
+
+    <nano-bar></nano-bar>
+
+By default, the bar will be fixed on the top of the document.
+
+@element nano-bar
+@blurb Nanobar as a Polymer element
+@homepage https://github.com/florianv/nano-bar
+-->
+<polymer-element name="nano-bar" attributes="bg targetId here percentage">
+    <template id="{{here}}">
+        <div id="barContainer"></div>
+    </template>
+    <script>
+        Polymer('nano-bar', {
+
+            /**
+             * The background color.
+             *
+             * @attribute bg
+             * @type string
+             * @default #000
+             */
+            bg: '#000',
+
+            /**
+             * The id of an element to use as target.
+             *
+             * @attribute targetId
+             * @type string
+             * @default null
+             */
+            targetId: null,
+
+            /**
+             * Whether the bar should be hosted in the shadow dom.
+             * If `targetId` is specified, this attribute will be ignored.
+             *
+             * @attribute here
+             * @type boolean
+             * @default false
+             */
+            here: false,
+
+            /**
+             * The percentage value.
+             *
+             * @attribute percentage
+             * @type number
+             * @default 0
+             */
+            percentage: 0,
+
+            ready: function () {
+                var options = {bg: this.bg};
+
+                if (this.targetId) {
+                    var targetElement = document.getElementById(this.targetId);
+
+                    if (targetElement) {
+                        options.target = targetElement;
+                    }
+                } else if (this.here) {
+                    options.target = this.$.barContainer;
+                }
+
+                this.nanobar = new Nanobar(options);
+
+                if (0 !== this.percentage) {
+                    this.go(this.percentage);
+                }
+            },
+
+            percentageChanged: function () {
+                this.go(this.percentage);
+            },
+
+            /**
+             * Sets the bar at the given percentage.
+             *
+             * @method go
+             */
+            go: function (percentage) {
+                this.nanobar.go(percentage);
+                this.percentage = percentage;
+            },
+
+            /**
+             * Advances the bar of the given percentage.
+             *
+             * @method advance
+             */
+            advance: function (percentage) {
+                this.go(this.percentage + percentage);
+            }
+        });
+    </script>
+</polymer-element>

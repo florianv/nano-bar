@@ -1,0 +1,69 @@
+<!--
+This file is part of nano-bar.
+
+(c) Florian Voutzinos <florian@voutzinos.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+-->
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>nano-bar demo</title>
+
+    <script src="../platform/platform.js"></script>
+
+    <style>
+        html, body {
+            margin: 0;
+        }
+
+        #secondTarget {
+            margin-top: 200px;
+            height: 10px;
+            width: 100%;
+        }
+
+        #third {
+            height: 10px;
+            float: left;
+            margin-top: 200px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body unresolved>
+
+<link rel="import" href="nano-bar.html">
+
+<nano-bar id="first"></nano-bar>
+
+<div id="secondTarget"></div>
+
+<nano-bar id="second" targetId="secondTarget" bg="#5677fc"></nano-bar>
+
+<nano-bar id="third" bg="#e51c23" here></nano-bar>
+
+<script>
+    document.addEventListener('polymer-ready', function() {
+        var firstBar = document.getElementById('first');
+        var secondBar = document.getElementById('second');
+        var thirdBar = document.getElementById('third');
+        var current = 0;
+
+        setInterval(function () {
+            current += 25;
+            if (current > 100) {
+                return;
+            }
+
+            firstBar.go(current);
+            secondBar.advance(25);
+            thirdBar.setAttribute('percentage', current);
+        }, 1000);
+    });
+</script>
+
+</body>
+</html>
