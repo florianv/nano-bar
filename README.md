@@ -30,7 +30,7 @@ Import the element:
 
 ## API
 
-Please check the [documentation](http://florianv.github.io/nanobar).
+Please check the [documentation](http://florianv.github.io/nano-bar).
 
 ## License
 
