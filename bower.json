@@ -9,7 +9,7 @@
     }
   ],
   "description": "Nanobar as a Polymer element",
-  "keywords": "loading, bar, nanobar, polymer, web-components",
+  "keywords": ["loading", "bar", "nanobar", "polymer", "web-components"],
   "main": "nano-bar.html",
   "license": "MIT",
   "homepage": "https://github.com/florianv/nano-bar",
